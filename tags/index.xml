@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Snow Magic Blog</title>
+    <link>https://example.org/tags/</link>
+    <description>Recent content in Tags on Snow Magic Blog</description>
+    <generator>Hugo</generator>
+    <language>zh_CN</language>
+    <lastBuildDate>Sun, 22 Jan 2023 16:44:40 +0000</lastBuildDate>
+    <atom:link href="https://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang</title>
+      <link>https://example.org/tags/golang/</link>
+      <pubDate>Sun, 22 Jan 2023 16:44:40 +0000</pubDate>
+      <guid>https://example.org/tags/golang/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Golang学习笔记</title>
+      <link>https://example.org/tags/golang%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sun, 22 Jan 2023 16:44:40 +0000</pubDate>
+      <guid>https://example.org/tags/golang%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>环境搭建</title>
+      <link>https://example.org/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Sun, 22 Jan 2023 16:44:40 +0000</pubDate>
+      <guid>https://example.org/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>8051 Study</title>
+      <link>https://example.org/tags/8051-study/</link>
+      <pubDate>Sat, 14 Jan 2023 00:36:37 +0000</pubDate>
+      <guid>https://example.org/tags/8051-study/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Golang Go基础练习</title>
+      <link>https://example.org/tags/golang-go%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/</link>
+      <pubDate>Mon, 19 Dec 2022 02:22:06 +0000</pubDate>
+      <guid>https://example.org/tags/golang-go%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

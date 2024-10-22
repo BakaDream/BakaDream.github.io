@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>环境搭建 on Snow Magic Blog</title>
+    <link>https://example.org/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+    <description>Recent content in 环境搭建 on Snow Magic Blog</description>
+    <generator>Hugo</generator>
+    <language>zh_CN</language>
+    <lastBuildDate>Sun, 22 Jan 2023 16:44:40 +0000</lastBuildDate>
+    <atom:link href="https://example.org/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang学习笔记(一):环境搭建</title>
+      <link>https://example.org/post/2023-01-22-golang%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Sun, 22 Jan 2023 16:44:40 +0000</pubDate>
+      <guid>https://example.org/post/2023-01-22-golang%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description>&lt;h1 id=&#34;一鸣谢&#34;&gt;一、鸣谢&lt;/h1&gt;&#xA;&lt;p&gt;感谢七米老师能够更新出一套优秀的Golang教程 让我在学习最新的Golang中少走弯路&#xA;七米老师Bilibili空间：https://space.bilibili.com/4638193/dynamic&#xA;七米老师的Blog : &lt;a href=&#34;https://www.liwenzhou.com/&#34;&gt;https://www.liwenzhou.com/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;二golang-sdk的安装windows-and-mac&#34;&gt;二、Golang SDK的安装(Windows and Mac)&lt;/h1&gt;&#xA;&lt;h3 id=&#34;1从golang官网上下载可执行文件安装&#34;&gt;1.从Golang官网上下载可执行文件安装&lt;/h3&gt;&#xA;&lt;p&gt;参考七米老师的Blog &lt;a href=&#34;https://www.liwenzhou.com/posts/Go/install/&#34;&gt;https://www.liwenzhou.com/posts/Go/install/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;2通过包管理器安装&#34;&gt;2.通过包管理器安装&lt;/h3&gt;&#xA;&lt;h4 id=&#34;windows使用winget安装&#34;&gt;Windows（使用Winget安装）&lt;/h4&gt;&#xA;&lt;p&gt;1.先打开CMD&#xA;2.输入winget search golang 可以看到有提供Golang的诸多版本 我这里下载最新的(Go 1.19)&#xA;3.输入 winget install [ID] -i  我这里下载Go 1.19就输入 winget install GoLang.Go.1.19 -i&#xA;4.接下来就和第一种方式一样了（不加-i不会有安装引导窗口）&lt;/p&gt;&#xA;&lt;h4 id=&#34;mac-使用homebrew安装&#34;&gt;Mac (使用Homebrew安装)&lt;/h4&gt;&#xA;&lt;p&gt;1.Homebrew国内安装参考https://zhuanlan.zhihu.com/p/111014448&#xA;2.打开终端输入 brew install golang 静待完成即可&lt;/p&gt;&#xA;&lt;h3 id=&#34;3检验是否安装成功&#34;&gt;3.检验是否安装成功&lt;/h3&gt;&#xA;&lt;p&gt;在终端输入 go version&#xA;提示 go version go1.19.5 windows/amd64 之类的即为安装成功&lt;/p&gt;&#xA;&lt;h1 id=&#34;三配置修改&#34;&gt;三、配置修改&lt;/h1&gt;&#xA;&lt;p&gt;现在的版本不需要设置GOROOT和GOPATH了 用GOMOD就行&lt;/p&gt;&#xA;&lt;p&gt;终端输入 go env -w GOPROXY=https://goproxy.cn,direct 修改国内代理为七牛&lt;/p&gt;&#xA;&lt;h1 id=&#34;四hello-world&#34;&gt;四、Hello World&lt;/h1&gt;&#xA;&lt;p&gt;1.新建工程文件夹 HelloWorld&#xA;2.在此目录下打开终端 输入 go mod init HelloWorld&#xA;3.新建文件 main.go&#xA;4.把以下代码输入到此文件里&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
