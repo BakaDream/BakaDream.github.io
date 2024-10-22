@@ -2,19 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>8051 Study on Snow Magic Blog</title>
-    <link>https://BakaDream.github.io/tags/8051-study/</link>
+    <link>https://bakadream.github,io/tags/8051-study/</link>
     <description>Recent content in 8051 Study on Snow Magic Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <copyright>BakaDream</copyright>
     <lastBuildDate>Sat, 14 Jan 2023 00:36:37 +0000</lastBuildDate>
-    <atom:link href="https://BakaDream.github.io/tags/8051-study/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://bakadream.github,io/tags/8051-study/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>51单片机学习笔记(1)-开发环境部署</title>
-      <link>https://BakaDream.github.io/p/51%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</link>
+      <link>https://bakadream.github,io/post/2023-01-14-51%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</link>
       <pubDate>Sat, 14 Jan 2023 00:36:37 +0000</pubDate>
-      <guid>https://BakaDream.github.io/p/51%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</guid>
-      <description>&lt;h1 id=&#34;1keil5安装与破解&#34;&gt;1.Keil5安装与破解&lt;/h1&gt;&#xA;&lt;p&gt;1.&lt;a href=&#34;https://www.keil.com/demo/eval/c51.htm&#34;&gt;C51 Version 9.61 Evaluation Software Request (keil.com)&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;从这里下载最新版Keil5-c51&lt;/p&gt;&#xA;&lt;p&gt;2.破解软件地址:[点我下载]((&lt;a href=&#34;https://raw.githubusercontent.com/mengdiao/PicStore/main/img/202302062219944.exe&#34;&gt;https://raw.githubusercontent.com/mengdiao/PicStore/main/img/202302062219944.exe&lt;/a&gt;)&lt;/p&gt;&#xA;&lt;p&gt;3.安装破解步骤参考http://t.csdn.cn/UxlLz&lt;/p&gt;&#xA;&lt;h1 id=&#34;2下载stc-isp&#34;&gt;2.下载stc-isp&lt;/h1&gt;&#xA;&lt;p&gt;打开stc官网&lt;/p&gt;&#xA;&lt;p&gt;下拉找到&lt;img src=&#34;https://raw.githubusercontent.com/mengdiao/PicStore/main/img/202302062215483.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;下载最新版&lt;/p&gt;&#xA;&lt;p&gt;然后拖到桌面打开就能用&lt;/p&gt;&#xA;&lt;h1 id=&#34;3向keil5里添加stc器件数据&#34;&gt;3.向keil5里添加STC器件数据&lt;/h1&gt;&#xA;&lt;p&gt;虽说AT的也能用但是还是添加一下比较好&lt;/p&gt;&#xA;&lt;p&gt;1.双击打开STC-ISP&lt;/p&gt;&#xA;&lt;p&gt;2.点Keil仿真设置&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/mengdiao/PicStore/main/img/202302062219719.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;3.点击图中这个按钮&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/mengdiao/PicStore/main/img/202302062217789.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;4.然后选择keil安装路径&lt;/p&gt;&#xA;&lt;ol start=&#34;5&#34;&gt;&#xA;&lt;li&gt;OK！&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;new project的时候就可以从这里看到了&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/mengdiao/PicStore/main/img/202302062218561.png&#34;&gt;&lt;/p&gt;</description>
+      <guid>https://bakadream.github,io/post/2023-01-14-51%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</guid>
+      <description>&lt;h1 id=&#34;1keil5安装与破解&#34;&gt;1.Keil5安装与破解&lt;/h1&gt;&#xA;&lt;p&gt;1.&lt;a href=&#34;https://www.keil.com/demo/eval/c51.htm&#34;&gt;C51 Version 9.61 Evaluation Software Request (keil.com)&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;从这里下载最新版Keil5-c51&lt;/p&gt;&#xA;&lt;p&gt;2.破解软件地址:[点我下载]((&lt;a href=&#34;https://raw.githubusercontent.com/mengdiao/PicStore/main/img/202302062219944.exe&#34;&gt;https://raw.githubusercontent.com/mengdiao/PicStore/main/img/202302062219944.exe&lt;/a&gt;)&lt;/p&gt;&#xA;&lt;p&gt;3.安装破解步骤参考http://t.csdn.cn/UxlLz&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
