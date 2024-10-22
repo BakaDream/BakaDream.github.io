@@ -2,10 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Snow Magic Blog</title>
-    <link>https://blog.132632.xyz/categories/</link>
+    <link>https://BakaDream.github.io/categories/</link>
     <description>Recent content in Categories on Snow Magic Blog</description>
     <generator>Hugo</generator>
-    <language>zh_CN</language>
-    <atom:link href="https://blog.132632.xyz/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language>
+    <copyright>BakaDream</copyright>
+    <atom:link href="https://BakaDream.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
