@@ -2,40 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://bakadream.github.io/en/categories/</loc>
+    <loc>https://blog.132632.xyz/en/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://bakadream.github.io/categories/"
+                href="https://blog.132632.xyz/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://bakadream.github.io/en/categories/"
+                href="https://blog.132632.xyz/en/categories/"
                 />
   </url><url>
-    <loc>https://bakadream.github.io/en/</loc>
+    <loc>https://blog.132632.xyz/en/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://bakadream.github.io/"
+                href="https://blog.132632.xyz/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://bakadream.github.io/en/"
+                href="https://blog.132632.xyz/en/"
                 />
   </url><url>
-    <loc>https://bakadream.github.io/en/tags/</loc>
+    <loc>https://blog.132632.xyz/en/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://bakadream.github.io/tags/"
+                href="https://blog.132632.xyz/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://bakadream.github.io/en/tags/"
+                href="https://blog.132632.xyz/en/tags/"
                 />
   </url>
 </urlset>
