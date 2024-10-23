@@ -1,47 +1,108 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Tags on Snow Magic Blog</title>
-    <link>https://bakadream.github,io/tags/</link>
-    <description>Recent content in Tags on Snow Magic Blog</description>
-    <generator>Hugo</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Sun, 22 Jan 2023 16:44:40 +0000</lastBuildDate>
-    <atom:link href="https://bakadream.github,io/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Golang</title>
-      <link>https://bakadream.github,io/tags/golang/</link>
-      <pubDate>Sun, 22 Jan 2023 16:44:40 +0000</pubDate>
-      <guid>https://bakadream.github,io/tags/golang/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Golang学习笔记</title>
-      <link>https://bakadream.github,io/tags/golang%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Sun, 22 Jan 2023 16:44:40 +0000</pubDate>
-      <guid>https://bakadream.github,io/tags/golang%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>环境搭建</title>
-      <link>https://bakadream.github,io/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
-      <pubDate>Sun, 22 Jan 2023 16:44:40 +0000</pubDate>
-      <guid>https://bakadream.github,io/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>8051 Study</title>
-      <link>https://bakadream.github,io/tags/8051-study/</link>
-      <pubDate>Sat, 14 Jan 2023 00:36:37 +0000</pubDate>
-      <guid>https://bakadream.github,io/tags/8051-study/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Golang Go基础练习</title>
-      <link>https://bakadream.github,io/tags/golang-go%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/</link>
-      <pubDate>Mon, 19 Dec 2022 02:22:06 +0000</pubDate>
-      <guid>https://bakadream.github,io/tags/golang-go%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/</guid>
-      <description></description>
-    </item>
-  </channel>
+    <channel>
+        <title>Tags on Snow Magic 博客</title>
+        <link>https://bakadream.github.io/tags/</link>
+        <description>Recent content in Tags on Snow Magic 博客</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>BakaDream</copyright>
+        <lastBuildDate>Sun, 22 Jan 2023 16:44:40 +0000</lastBuildDate><atom:link href="https://bakadream.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Golang</title>
+        <link>https://bakadream.github.io/tags/golang/</link>
+        <pubDate>Sun, 22 Jan 2023 16:44:40 +0000</pubDate>
+        
+        <guid>https://bakadream.github.io/tags/golang/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Golang学习笔记</title>
+        <link>https://bakadream.github.io/tags/golang%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Sun, 22 Jan 2023 16:44:40 +0000</pubDate>
+        
+        <guid>https://bakadream.github.io/tags/golang%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>环境搭建</title>
+        <link>https://bakadream.github.io/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+        <pubDate>Sun, 22 Jan 2023 16:44:40 +0000</pubDate>
+        
+        <guid>https://bakadream.github.io/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Css</title>
+        <link>https://bakadream.github.io/tags/css/</link>
+        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+        
+        <guid>https://bakadream.github.io/tags/css/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Html</title>
+        <link>https://bakadream.github.io/tags/html/</link>
+        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+        
+        <guid>https://bakadream.github.io/tags/html/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Markdown</title>
+        <link>https://bakadream.github.io/tags/markdown/</link>
+        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+        
+        <guid>https://bakadream.github.io/tags/markdown/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Themes</title>
+        <link>https://bakadream.github.io/tags/themes/</link>
+        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+        
+        <guid>https://bakadream.github.io/tags/themes/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Privacy</title>
+        <link>https://bakadream.github.io/tags/privacy/</link>
+        <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+        
+        <guid>https://bakadream.github.io/tags/privacy/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Shortcodes</title>
+        <link>https://bakadream.github.io/tags/shortcodes/</link>
+        <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+        
+        <guid>https://bakadream.github.io/tags/shortcodes/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Tag With Whitespaces</title>
+        <link>https://bakadream.github.io/tags/tag-with-whitespaces/</link>
+        <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+        
+        <guid>https://bakadream.github.io/tags/tag-with-whitespaces/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Text</title>
+        <link>https://bakadream.github.io/tags/text/</link>
+        <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+        
+        <guid>https://bakadream.github.io/tags/text/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Emoji</title>
+        <link>https://bakadream.github.io/tags/emoji/</link>
+        <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
+        
+        <guid>https://bakadream.github.io/tags/emoji/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
 </rss>

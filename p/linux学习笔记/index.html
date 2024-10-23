@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="课程结构\n第一章 Linux创始人 Linus\nLinux 内核提供系统调度\n应用程序 帮助用户使用\nLinux Kernel 官网 www.kernel.org\n中科大源 mirrors.ustc.edu.cn（我从这里下载的，不到一分钟就够了）\n">
+<title>Linux学习笔记</title>
+
+<link rel='canonical' href='https://bakadream.github.io/p/linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Linux学习笔记">
+<meta property='og:description' content="课程结构\n第一章 Linux创始人 Linus\nLinux 内核提供系统调度\n应用程序 帮助用户使用\nLinux Kernel 官网 www.kernel.org\n中科大源 mirrors.ustc.edu.cn（我从这里下载的，不到一分钟就够了）\n">
+<meta property='og:url' content='https://bakadream.github.io/p/linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
+<meta property='og:site_name' content='Snow Magic 博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2023-04-02T21:08:47&#43;08:00'/><meta property='article:modified_time' content='2023-04-02T21:08:47&#43;08:00'/>
+<meta name="twitter:title" content="Linux学习笔记">
+<meta name="twitter:description" content="课程结构\n第一章 Linux创始人 Linus\nLinux 内核提供系统调度\n应用程序 帮助用户使用\nLinux Kernel 官网 www.kernel.org\n中科大源 mirrors.ustc.edu.cn（我从这里下载的，不到一分钟就够了）\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu12734014943105434191.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Snow Magic 博客</a></h1>
+            <h2 class="site-description">欢迎</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/271839670'
+                        target="_blank"
+                        title="BiliBili"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1729648701009" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1478" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M419.5 309.304c-17.514-9.487-35.029-18.974-52.543-28.583l-87.209-47.435c-11.798-6.447-16.663-16.299-9.973-28.462 6.69-12.284 17.88-13.136 29.434-6.81 68.113 37.096 136.347 74.072 204.338 111.655 17.393 9.609 48.773 3.892 59.842-12.406a66632.417 66632.417 0 0 0 104.115-151.55c1.216-1.825 2.432-3.65 3.648-5.352 9.852-13.745 21.164-17.393 31.38-9.366 11.799 9.366 9.853 20.434 2.19 31.624a18582.62 18582.62 0 0 0-42.205 61.788c-19.461 28.583-38.922 57.166-60.694 88.911h245.084c22.867 0 26.394 3.649 26.515 26.515 0.244 156.78 0.365 313.44 0.609 470.22 0 22.38-4.014 26.272-26.88 26.394-5.96 0-12.042 0.608-17.88-0.122-21.65-2.432-37.462-0.364-45.003 26.394-6.811 24.083-32.475 36.367-55.585 33.935-26.758-2.798-44.395-18.61-51.206-43.544-4.135-15.082-11.19-17.15-24.812-17.028-94.02 0.608-187.918 0.365-281.938 0.122-10.825 0-17.15 0.973-20.312 14.109-6.811 28.218-30.043 46.098-55.706 46.584-26.637 0.487-49.747-16.907-57.531-46.22-3.284-12.284-8.758-15.081-20.07-14.473-14.595 0.851-29.312 0.365-44.029 0.121-16.055-0.364-23.11-6.932-23.11-22.623 0.122-159.334 0.365-318.791 0.73-478.247 0-16.542 6.69-22.015 25.056-22.015 75.532-0.122 151.064 0 226.474 0h15.812c0.487-1.338 0.973-2.676 1.46-4.136z m417.555 490.29V349.076H188.648v450.516h648.407z m-520.94 37.948h-44.638c3.041 12.77 9.244 21.771 21.164 22.501 13.258 0.973 19.582-8.879 23.474-22.501z m394.445-0.122c4.5 13.623 10.582 23.596 23.961 22.623 12.042-0.851 17.637-10.217 21.286-22.623H710.56z" fill="#1296DB" p-id="1479"></path><path d="M513.399 768.578H252.746c-25.299 0-29.312-4.014-29.312-29.313 0.121-108.98 0.243-217.96 0.486-327.062 0-22.988 4.744-27.732 27.61-27.732h523.008c23.23 0 27.974 4.622 28.096 27.367 0.365 109.588 0.608 219.055 0.73 328.643 0 23.475-4.865 27.975-29.07 28.097H513.4z m250.678-38.557V423.393H262.234V730.02h501.843z" fill="#1296DB" p-id="1480"></path><path d="M515.71 675.653c-6.69 4.743-12.893 10.095-19.948 13.865-23.23 12.285-46.34 11.19-67.747-3.77-23.596-16.542-34.057-40.746-31.989-68.964 0.487-6.082 11.677-15.69 18.123-15.934 6.325-0.243 14.352 8.515 18.974 15.204 3.65 5.352 2.068 13.866 4.622 20.312 4.865 12.285 13.866 23.961 27.367 21.042 9.973-2.067 18.974-12.163 26.393-20.434 3.65-4.135 3.041-12.284 4.014-18.609 1.703-12.041 8.636-19.339 20.434-19.096 10.703 0.244 17.636 6.812 19.096 18.488 0.851 7.42 1.094 16.663 5.473 21.528 7.055 7.906 17.028 17.393 26.15 17.758 8.15 0.244 18.123-9.73 24.57-17.514 4.257-5.109 4.013-14.231 5.351-21.65 2.19-11.798 8.88-18.975 21.042-18.123 12.042 0.973 18.366 8.757 17.88 21.042-1.216 31.015-13.38 56.193-42.084 70.058-26.758 12.893-51.814 7.42-73.708-12.527-1.216-0.852-2.554-1.582-4.013-2.676z m214.068-116.035c0.365 18.366-14.596 28.461-28.461 20.555-37.097-21.163-73.586-43.421-109.954-65.801-9.608-5.96-11.676-15.69-6.081-25.542 5.716-10.096 15.812-12.772 25.177-7.42 37.462 21.65 74.56 43.908 111.413 66.653 4.257 2.798 6.325 9.244 7.906 11.555z m-316.602-70.667c3.406 3.406 12.163 8.15 13.136 13.988 1.095 6.932-2.554 18.974-7.906 21.65-32.232 16.541-65.315 31.38-98.52 46.097-10.095 4.5-21.164 1.095-23.718-9.852-1.703-7.176 1.338-20.677 6.447-23.353 33.204-17.028 67.504-31.745 101.439-47.192 1.46-0.608 3.162-0.486 9.122-1.338z" fill="#1296DB" p-id="1481"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/BakaDream'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://bakadream.github.io/" selected>中文</option>
+                                
+                                    <option value="https://bakadream.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#vivim编辑器的使用">vi\vim编辑器的使用</a></li>
+        <li><a href="#命令模式">命令模式：</a></li>
+        <li><a href="#输入模式"><strong>输入模式</strong></a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#1root用户与su-sudo">1.root用户与su sudo</a></li>
+    <li><a href="#2用户与权限组">2.用户与权限组</a></li>
+    <li><a href="#3查看权限控制信息">3.查看权限控制信息</a></li>
+    <li><a href="#4修改权限控制">4.修改权限控制</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#1各类快捷键">1.各类快捷键</a></li>
+    <li><a href="#2用yum或apt安装软件">2.用yum或apt安装软件</a></li>
+    <li><a href="#3systemctl控制软件启动关闭">3.systemctl控制软件启动关闭</a></li>
+    <li><a href="#4软链接">4.软链接</a></li>
+    <li><a href="#5日期和时区">5.日期和时区</a></li>
+    <li><a href="#6ip地址主机名">6.IP地址、主机名</a></li>
+    <li><a href="#8网络请求">8.网络请求</a></li>
+    <li><a href="#9端口">9.端口</a></li>
+    <li><a href="#10进程管理">10.进程管理</a></li>
+    <li><a href="#11主机状态">11.主机状态</a></li>
+    <li><a href="#12环境变量">12.环境变量</a></li>
+    <li><a href="#13上传下载">13.上传下载</a></li>
+    <li><a href="#14压缩解压">14.压缩解压</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#1-安装mysql">1. 安装mysql</a>
+      <ol>
+        <li><a href="#安装mysql57">安装mysql5.7</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Linux学习笔记</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 02, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 12 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>课程结构</p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=350598"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h1 id="第一章">第一章
+</h1><p>Linux创始人 Linus</p>
+<p>Linux 内核提供系统调度</p>
+<p>应用程序 帮助用户使用</p>
+<p>Linux Kernel 官网 <a class="link" href="https://www.kernel.org"  target="_blank" rel="noopener"
+    >www.kernel.org</a></p>
+<p>中科大源  mirrors.ustc.edu.cn（我从这里下载的，不到一分钟就够了）</p>
+<p>虚拟机VMware</p>
+<p>Centos官网www.centos.org</p>
+<p>ssh工具 openssh xshell finalshell</p>
+<h1 id="第二章-基本操作命令入门">第二章 基本操作命令入门
+</h1><p><strong>ls命令(</strong> list directory contents**)**</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ls [-h -l -a] 文件路径
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-a 全部文件 -l 列表显示 -h 使文件信息更易读</li>
+</ul>
+<p><strong>touch命令(</strong> 创建一个文件**)**</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">touch 文件路径
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>查看文件内容cat more</strong></p>
+<p>​	1.直接查看文件内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cat 文件路径 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​	2.翻页查看文件内容(按Q退出)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">more 文件路径 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>复制删除移动文件(文件夹)</strong></p>
+<p>​	1.cp命令 复制文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> cp [-r] 参数1 参数2 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-r表示文件夹 	参数1被复制的目录 参数2表示要复制去的地方</li>
+</ul>
+<p>​	2.mv命令 移动文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mv 被移动的 要粘贴的
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​	3.rm命令 删除文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">rm [-r -f] 参数1 2 3 4 .....
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-r 表示文件夹 -f 表示强制删除</li>
+</ul>
+<p><strong>which 命令</strong> 用来查找命令的程序本土文件的路径</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">which 要查找命令
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>find命令</strong></p>
+<p>1.文件名查询</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">find 起始路径 -name &#34;被查找的文件名&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>find能使用通配符匹配</li>
+<li>只有 *符号 表示任意内容</li>
+<li>test* 表示任意以test开头的</li>
+<li>*test 任意以test结尾的</li>
+<li><em>test</em> 任意包含test的</li>
+</ul>
+<p>2.按文件大小查询</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">find 起始路径 -size +或-n[kmg]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>+,-表示大于和小于</li>
+<li>n表示大小数字</li>
+<li>kmg表示大小单位 k表示kb M表示MB G表示GB</li>
+</ul>
+<p>​	example:</p>
+<p>​			find / -size -10k</p>
+<p><strong>grep命令</strong> 从文件中通过关键字过滤文件行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">grep [-n] 关键字 文件路径
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-n 可选，在结果显示被过滤处内容 的行号</li>
+<li>关键字，必填，表示过滤的关键字，带有空格或其他特殊符号用**&quot;&quot;**将关键字围住</li>
+<li>文件路径，必填，表示要过滤内容的文件路径，可作为内容输入端口</li>
+</ul>
+<p><strong>wc命令</strong> 统计文件的行数、单词数量等</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">wc [-c -m -l -w] 文件路径
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-c 统计byte数量 输出： 字节数 文件名</li>
+<li>-m统计字符数量 输出： 字符数 文件名</li>
+<li>-l统计行数</li>
+<li>-w 统计单词数量</li>
+<li>不加选项使用命令输出：行数 单词数量 字节数 文件名</li>
+</ul>
+<p><strong>echo命令</strong> 用来在命令行中输出指定的内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">echo 输出的内容
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>复杂内容可用 &quot; &quot; 包围</li>
+<li>通过反引号格式化输出 反引号包围内的命令会被执行 结果被输出</li>
+</ul>
+<p><strong>管道符 |</strong></p>
+<ul>
+<li>将管道符左边命令的结果，作为右边命令的输入</li>
+</ul>
+<p><strong>重定向符</strong></p>
+<ul>
+<li>&gt; 将左侧命令结果 覆盖写入到右侧文件中</li>
+<li>&gt;&gt; 将左侧命令结果 追加写入到符号右侧命令中</li>
+</ul>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=351643"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<p><strong>tail命令</strong> 查看文件尾部内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> tail [-f -num] 文件路径
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-f 表示持续追踪</li>
+<li>-num 表示查看尾部多少行，num替换为对应的数字（默认10行）</li>
+<li>通过ctrl + c 退出</li>
+</ul>
+<h3 id="vivim编辑器的使用">vi\vim编辑器的使用
+</h3><ol>
+<li>工作模式</li>
+</ol>
+<ul>
+<li>命令模式(Command mode)</li>
+</ul>
+<p>​					命令模式下，所敲的按键 编辑器都理解为命令，以命令驱动器执行不同的功能，此模式下不能自由进行文本编辑</p>
+<ul>
+<li>输入模式(Insert mode)</li>
+</ul>
+<p>​					即编辑模式、插入模式 此模式下能自由编辑文件内容</p>
+<ul>
+<li>底线模式(Last line mode)</li>
+</ul>
+<p>​					以**:**开始,通常用于文件的保存、退出</p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=351660"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">vim 文件路径
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>根据此命令 修改文件</p>
+<h3 id="命令模式">命令模式：
+</h3><p>用户刚刚启动 vi/vim，便进入了命令模式。</p>
+<p>此状态下敲击键盘动作会被Vim识别为命令，而非输入字符。比如我们此时按下i，并不会输入一个字符，i被当作了一个命令。</p>
+<p>以下是常用的几个命令：</p>
+<ul>
+<li><strong>i</strong> 切换到输入模式，以输入字符。</li>
+<li><strong>x</strong> 删除当前光标所在处的字符。</li>
+<li><strong>:</strong> 切换到底线命令模式，以在最底一行输入命令。</li>
+</ul>
+<p>若想要编辑文本：启动Vim，进入了命令模式，按下i，切换到输入模式。</p>
+<p>命令模式只有一些最基本的命令，因此仍要依靠底线命令模式输入更多命令。</p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=351664"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=351667"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h3 id="输入模式"><strong>输入模式</strong>
+</h3><p>在命令模式下按下i就进入了输入模式。</p>
+<p>在输入模式中，可以使用以下按键：</p>
+<ul>
+<li><strong>字符按键以及Shift组合</strong>，输入字符</li>
+<li><strong>ENTER</strong>，回车键，换行</li>
+<li><strong>BACK SPACE</strong>，退格键，删除光标前一个字符</li>
+<li><strong>DEL</strong>，删除键，删除光标后一个字符</li>
+<li><strong>方向键</strong>，在文本中移动光标</li>
+<li><strong>HOME</strong>/<strong>END</strong>，移动光标到行首/行尾</li>
+<li><strong>Page Up</strong>/<strong>Page Down</strong>，上/下翻页</li>
+<li><strong>Insert</strong>，切换光标为输入/替换模式，光标将变成竖线/下划线</li>
+<li><strong>ESC</strong>，退出输入模式，切换到命令模式</li>
+</ul>
+<p>底线命令模式</p>
+<p>在命令模式下按下:（英文冒号）就进入了底线命令模式。</p>
+<p>底线命令模式可以输入单个或多个字符的命令，可用的命令非常多。</p>
+<p>在底线命令模式中，基本的命令有（已经省略了冒号）：</p>
+<ul>
+<li>wq保存并退出</li>
+<li>q 退出</li>
+<li>q!强制退出</li>
+<li>w 报错</li>
+<li>set nu 显示行号</li>
+<li>set paste 设置粘贴模式</li>
+<li>按ESC键可随时退出底线命令模式。</li>
+</ul>
+<h1 id="第三章linux用户和权限">第三章Linux用户和权限
+</h1><h2 id="1root用户与su-sudo">1.root用户与su sudo
+</h2><p>root用户即为超级管理员</p>
+<p>普通用户切换为root用户</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">su [-] [username]    #su(Switch User)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>[-] 可选 表示是否在切换用户后加载环境变量</p>
+<p>username 用户名 省略表示切换到root</p>
+<p>输入exit命令可以退回上一个用户 也可以 ctrl+d</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo 其他命令
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用sudo命令，为普通的命令授权，临时以root身份运行</p>
+<p>不是所以的用户，都有权利使用sudo，需要为普通用户配置sudo认证</p>
+<p><strong>为普通用户配置sudo认证（在root用户下）</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#打开 /etc/sudoers
+</span></span><span class="line"><span class="cl">visudo
+</span></span><span class="line"><span class="cl">#在文件最后添加
+</span></span><span class="line"><span class="cl">username ALL=(ALL)		NoPASSWD:ALL
+</span></span><span class="line"><span class="cl">#最后的NOPASSWD:ALL 表示使用sudo命令无需密码
+</span></span><span class="line"><span class="cl">:wq #保存
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2用户与权限组">2.用户与权限组
+</h2><p>Linux系统可以:</p>
+<ul>
+<li>配置多个用户</li>
+<li>配置多个用户</li>
+<li>用户可以加入多个用户组中</li>
+</ul>
+<p><strong>用户(组)管理(<font color=Red>以下命令用root用户执行</font>)</strong></p>
+<ul>
+<li>
+<p>创建用户组   <code>groupadd 用户组名</code></p>
+</li>
+<li>
+<p>删除用户组 <code>groupdel 用户组名</code></p>
+</li>
+<li>
+<p>创建用户 <code>useradd [-g -d] 用户名</code></p>
+<ul>
+<li>-g 指定用户的组，不指定-g，会创建同名的组并自动加入，指定-g需要组已经存在，如已存在同名组，必须使用-g</li>
+<li>-d 指定用户的home路径，不指定， home路径默认在：/home/用户名</li>
+</ul>
+</li>
+<li>
+<p>删除用户 <code>userdel [-r] 用户名</code></p>
+<ul>
+<li>-r 删除用户的HOME 目录，不使用-r，删除用户时，HOME目录保留</li>
+</ul>
+</li>
+<li>
+<p>查看用户所属组 <code>id [用户名]</code></p>
+<ul>
+<li>用户名即被查看的用户，如不提供则产看自身</li>
+</ul>
+</li>
+<li>
+<p>修改用户所属组 <code>usermod -aG 用户组 用户名</code></p>
+<ul>
+<li>即将用户加入指定的用户组</li>
+</ul>
+</li>
+<li>
+<p>查看系统中的用户 <code>getent passwd</code></p>
+<ul>
+<li>输出共有7份信息: <code>用户名:密码(x):用户ID:组ID:描述信息(无用):HOME目录:执行终端(默认bash)</code></li>
+</ul>
+</li>
+<li>
+<p>查看系统中的用户组 <code>getent group</code></p>
+<ul>
+<li>3份信息,<code>组名称:组认证(x):组ID:</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="3查看权限控制信息">3.查看权限控制信息
+</h2><ul>
+<li>
+<p><code>ls -l</code>以列表形式查看内容,并显示权限细节</p>
+<ul>
+<li>
+<p><img src="https://raw.githubusercontent.com/mengdiao/PicStore/main/img/202304022155684.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="https://raw.githubusercontent.com/mengdiao/PicStore/main/img/202304022155684.png"
+	
+	
+></p>
+</li>
+<li>
+<ol>
+<li>文件和文件夹的权限信息(开头为d的为文件夹)</li>
+<li>所属用户</li>
+<li>所属用户组</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>权限信息</p>
+<ul>
+<li>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+          <th>5</th>
+          <th>6</th>
+          <th>7</th>
+          <th>8</th>
+          <th>9</th>
+          <th>10</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-或d或l</td>
+          <td>r或-</td>
+          <td>w或-</td>
+          <td>x或-</td>
+          <td>r或-</td>
+          <td>w或-</td>
+          <td>x或-</td>
+          <td>r或-</td>
+          <td>w或-</td>
+          <td>x或-</td>
+      </tr>
+  </tbody>
+</table></div>
+<ul>
+<li>第一个槽位 <code>-</code>表示文件 <code>d</code>表示文件 <code>l</code>表示软链接</li>
+<li>2-4 为所属用户权限</li>
+<li>5-7 为所属用户组权限</li>
+<li>8-10 为其他用户权限
+<ul>
+<li>r表示读权限(针对文件夹，可以查看文件夹内容如 ls)</li>
+<li>w表示写权限(针对文件夹表示可以在文件夹内进行创建修改等操作)</li>
+<li>x表示执行权限(针对文件夹表示可以更改工作目录到此文件夹，即cd进入)</li>
+<li>-表示无权限</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4修改权限控制">4.修改权限控制
+</h2><p><strong>chmod命令</strong></p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">chmod [-R] 权限 文件或文件夹
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>选项-R 对文件夹内的全部内容应用同样的操作</p>
+</li>
+<li>
+<p>example</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">chmod u=rwx,g=rx,o=x hello.txt #将文件权限修改为rwxr-x--x
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>其中u表示user所属用户权限，g表示group权限，o表示other其他用户权限</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">chmod -R u=rwx,g=rx,o=x test #将文件夹以及文件夹内全部内容权限
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>数字</th>
+          <th>对应字母</th>
+          <th>权限</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0</td>
+          <td>&mdash;</td>
+          <td>无权限</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>&ndash;x</td>
+          <td>只能执行</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>-w-</td>
+          <td>只可写</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>-wx</td>
+          <td>执行和写</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>r&ndash;</td>
+          <td>只读</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>r-x</td>
+          <td>读和运行</td>
+      </tr>
+      <tr>
+          <td>6</td>
+          <td>rw-</td>
+          <td>读写</td>
+      </tr>
+      <tr>
+          <td>7</td>
+          <td>rwx</td>
+          <td>读写运行</td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">chmod 755 test.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>chown命令</strong></p>
+<p>使用chown命令，可以修改文件、文件夹所属用户和用户组</p>
+<p>此命令只适用于root用户</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">chown [-R] [用户][:][用户组] 文件或文件夹
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>-R 同chmod</p>
+</li>
+<li>
+<p>用户 用于修改所属用户</p>
+</li>
+<li>
+<p>用户组 修改所属用户组</p>
+</li>
+<li>
+<p>：用于分割用户和用户组</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">chown root hello.txt
+</span></span><span class="line"><span class="cl">chown :root hello.txt
+</span></span><span class="line"><span class="cl">chown root:baka hello.txt
+</span></span><span class="line"><span class="cl">chown -R root test
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="第四章-linux使用操作">第四章 Linux使用操作
+</h1><h2 id="1各类快捷键">1.各类快捷键
+</h2><p><code>ctrl + c</code> 强制停止 / 退出当前命令输入</p>
+<p><code>ctrl + d</code> 退出账号登陆 或退出某些程序专属界面例如python 不能用于vim/vi</p>
+<p><code>history</code> 此命令用来查看历史输入过的命令</p>
+<p><code>!命令开头</code>自动执行上一个匹配前缀的命令 例如执行过一次<code>python</code> 再输入<code>!py</code>就能匹配到python并执行</p>
+<p><code>!数字</code> 例如通过history 查看到169是执行的clear 输入<code>!169</code> 就会执行clear</p>
+<p><code>ctrl + l</code>终端清屏</p>
+<p>光标移动相关</p>
+<p><code>ctrl + r</code>输入内容去匹配历史命令</p>
+<p><code>ctrl + a</code> 跳到命令开头</p>
+<p><code>ctrl + e</code>跳到命令结尾</p>
+<p><code>ctrl + ←</code> 向左跳一个单词</p>
+<p><code>ctrl + →</code>向右跳一个单词</p>
+<h2 id="2用yum或apt安装软件">2.用yum或apt安装软件
+</h2><p><strong>yum命令</strong></p>
+<p>RPM包软件管理器，用于自动化安装配置软件，并自动解决依赖问题</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">yum [-y] [install|remove|search] 软件名
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-y 自动确认</li>
+<li>install安装 remove卸载 search搜索</li>
+</ul>
+<p><font color=red>yum需要root权限 用root用户 或sudo 还需要联网</font></p>
+<p><strong>apt命令</strong></p>
+<p>deb包软件管理器，用于自动化安装配置软件，并自动解决依赖问题</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apt [-y] [install|remove|search] 软件名
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-y 自动确认</li>
+<li>install安装 remove卸载 search搜索</li>
+</ul>
+<p><font color=red>apt需要root权限 用root用户 或sudo 还需要联网</font></p>
+<h2 id="3systemctl控制软件启动关闭">3.systemctl控制软件启动关闭
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">systemctl start | stop | status | enable | disable 服务名
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>start启动 stop关闭 status查看状态 enable允许开机自启 disable关闭开机自启</li>
+</ul>
+<h2 id="4软链接">4.软链接
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ln -s 参数1 参数2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-s 创建软链接</li>
+<li>参数1 被链接的文件或文件夹</li>
+<li>参数2 要链接去的目的地</li>
+</ul>
+<h2 id="5日期和时区">5.日期和时区
+</h2><p><strong>在命令行中查看系统的时间</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">date [-d] [+格式化字符串]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>-d 按照给定的字符串显示日期，一般用于日期计算</p>
+<ul>
+<li>
+<p>支持的时间标记: <code>year</code>年 <code>month</code>月 <code>day</code>日<code>hour</code>小时<code>minute</code>分钟<code>second</code>秒</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">date -d &#34;+1 year +1 day&#34; &#34;+%Y-%d&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>格式化字符串</p>
+<ul>
+<li>%Y 年</li>
+<li>%y 年份后两位数字</li>
+<li>%m 月份(01-12)</li>
+<li>%d 日 (01-31)</li>
+<li>%H 小时 (00-23)</li>
+<li>%M 分钟 (00-60)</li>
+<li>%S 秒 （00-60）</li>
+<li>%s 时间戳 自1970-01-01 00：00：00UTC到现在的秒数</li>
+</ul>
+</li>
+</ul>
+<p><strong>修改Linux日期/时区</strong></p>
+<ol>
+<li>执行以下命令 修改为东八区</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">rm -f /etc/localtime
+</span></span><span class="line"><span class="cl">sudo ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2.通过ntp自动校准时间</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">yum install ntp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>启动并设置开机自启</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">systemctl start ntpd
+</span></span><span class="line"><span class="cl">systemctl enable ntpd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>手动使用ntp校准</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ntpdate -u ntp.aliyun.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="6ip地址主机名">6.IP地址、主机名
+</h2><p><strong>IP地址</strong></p>
+<p>使用ifconfig查看ip地址 如无法使用 yum install -y net-tools</p>
+<ul>
+<li>127.0.0.1 用于代指本机</li>
+<li>0.0.0.0 特殊ip地址
+<ul>
+<li>用于代指本机</li>
+<li>可以在端口绑定中用来确定绑定关系</li>
+<li>在一些ip地址限制中，表示所以ip限制的意思，如果放行规则设置为0.0.0.0表示允许任意ip访问</li>
+</ul>
+</li>
+</ul>
+<p><strong>主机名</strong></p>
+<p>windows在系统设置查看</p>
+<p>Linux使用<code>hostname</code>查看</p>
+<p>​	<strong>Linux修改主机名</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hostnamectl set-hostname 名字
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>域名解析</strong></p>
+<p>​	 修改host文件 或者买域名</p>
+<h2 id="8网络请求">8.网络请求
+</h2><p><strong>ping</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ping [-c num] ip或主机名
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>-c检查的次数 不指定次数将无限次检查</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ping -c 3 baidu.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p><strong>wget</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">wget -b url
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-b 后台下载，并将日志写再当前工作目录中的wget-log中</li>
+</ul>
+<p><strong>curl</strong></p>
+<p>curl可以发送网络请求。可以用于：下载文件获取信息等</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl [-O] url
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-O 当下载文件时，可用次选项保存文件</li>
+</ul>
+<h2 id="9端口">9.端口
+</h2><p>支持端口0-65535</p>
+<p>公认端口1-1023 用于一些系统内置或知名程序的预留使用 如22,443</p>
+<p>注册端口1024-49151</p>
+<p>动态端口49152-65535</p>
+<p><strong>查看端口占用</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">yum -y install nmap
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nmap ip地址
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://raw.githubusercontent.com/mengdiao/PicStore/main/img/202304052327326.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">netstat -anp | grep 端口号 #查看指定端口的占用情况
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="10进程管理">10.进程管理
+</h2><p><strong>查看进程</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ps [-e -f]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-e 显示全部的进程</li>
+<li>-f 以完全格式化的形式展示信息</li>
+<li>一般固定写法<code>ps -ef</code></li>
+</ul>
+<p>UID 进程所属的用户的ID</p>
+<p>PID 进程的进程号ID</p>
+<p>PPID 进程的父进程的ID</p>
+<p>C：此进程的CPU占用率</p>
+<p>STIME 进程的启动时间</p>
+<p>TTY 启动此进程的终端序号，如显示? 表示非终端启动</p>
+<p>TIME 进程占用CPU的时间</p>
+<p>CMD 进程的启动命令或启动命令</p>
+<p><strong>关闭进程</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kill [-9] 进程ID
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>-9 表示强制关闭进程</p>
+<h2 id="11主机状态">11.主机状态
+</h2><p><strong>查看系统资源占用</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">top #查看占用 每5秒刷新一次
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://raw.githubusercontent.com/mengdiao/PicStore/main/img/202304062208902.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ul>
+<li>PID:进程id</li>
+<li>USER:进程所属用户. PR:进程优先级，越小越高</li>
+<li>NI:负值表示高优先级,正表示低优先级</li>
+<li>VIRT:进程使用虚拟内存,单位KB</li>
+<li>RES:进程使用物理内存,单位KB</li>
+<li>SHR:进程使用共享内存,单位KB</li>
+<li>S:进程状态(S休眠,R运行,Z僵死状态,N负数优先级,l空闲状态)</li>
+<li>%CPU:进程占用CPU率</li>
+<li>%MEM:进程占用内存率</li>
+<li>TIME+:进程使用CPU时间总计，单位10毫秒</li>
+<li>COMMAND:;进程的命令或名称诚程序文件路径</li>
+</ul>
+<p>top命令也支持选项:
+选项 功能</p>
+<ul>
+<li>-p只显示某个进程的信息</li>
+<li>-d设置刷新时间，默认是5s</li>
+<li>-c显示产生进程的完整命令，默认是进程名</li>
+<li>-n指定刷新次数，比如 top -n 3，刷新输出3次后退出</li>
+<li>-b，以非交互非全屏模式运行，以批次的方式执行top，一般配合-n指定输出几次统计信息，将输出重定向到指定文件，比如top -b -n 3 &gt; /tmp/top.tmp</li>
+<li>-i不显示任何闲置( idle)或无用(zombie)的进程</li>
+<li>-u查找特定用户启动的进程</li>
+</ul>
+<p>当top以交互式运行（非-b选项启动)，可以用以下交互式命令进行控制按键功能</p>
+<ul>
+<li>h键	按下h键，会显示帮助画面</li>
+<li>c键	按下c键，会显示产生进程的完整命令，等同于-c参数，再次按下c键，变为默认显示</li>
+<li>f键   按下f键，可以选择需要展示的项目</li>
+<li>M键	按下M键，根据驻留内存大小(RES）排序</li>
+<li>P键    按下P键，根据CPU使用百分比大小进行排序</li>
+<li>T键	按下T键，根据时间/累计时间进行排序</li>
+<li>E键	按下E键，切换顶部内存显示单位</li>
+<li>e键	按下e键，切换进程内存显示单位</li>
+<li>l键	按下l键，切换显示平均负载和启动时间信息。</li>
+<li>i键	按下i键，不显示闲置或无用的进程，等同于-i参数，再次按下，变为默认显示</li>
+<li>t键	按下t键，切换显示CPU状态信息</li>
+<li>m	键按下m键，切换显示内存信息</li>
+</ul>
+<p><strong>磁盘信息监控</strong></p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">df [-h] #查看磁盘的使用情况
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-h 以更加人性化的单位显示</li>
+</ul>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">iostat [-x] [num1] [num2]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-x 显示更多信息</li>
+<li>num1 刷新间隔 num2 刷新几次</li>
+</ul>
+</li>
+</ul>
+<p><strong>网络状态监控</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sar -n DEV num1 num2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-n查看网络 DEV表示查看网络接口 num1num2同上</li>
+</ul>
+<h2 id="12环境变量">12.环境变量
+</h2><p><code>env</code> 命令查看当前系统中的环境变量</p>
+<p>**PATH **</p>
+<p>PTAH记录了系统执行任何命令的搜索路径</p>
+<p>$符号用于取环境变量的值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">echo $PATH
+</span></span><span class="line"><span class="cl">echo ${PATH}ABC #输出PATH的值并拼接上ABC
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>设置环境变量</strong></p>
+<ul>
+<li>
+<p>临时设置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">export</span> <span class="err">变量名</span><span class="o">=</span><span class="err">变量值</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>永久生效</p>
+<ul>
+<li>
+<p>针对当前用户，配置在当前用户的 ~/.bashrc 文件中中</p>
+</li>
+<li>
+<p>针对所有用户，配置在系统的 /etc/profile文件中</p>
+</li>
+<li>
+<p>在文件中插入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">export</span> <span class="err">变量名</span><span class="o">=</span><span class="err">值</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>通过语法<code>source 配置文件</code> 进行立刻生效，或重新登录shell</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>自定义环境变量PATH</strong></p>
+<ul>
+<li>
+<p>临时</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">export</span> <span class="n">PATH</span><span class="o">=$</span><span class="n">PATH</span><span class="p">:</span><span class="err">文件路径</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>永久就将命令写入配置文件中</p>
+</li>
+</ul>
+<h2 id="13上传下载">13.上传下载
+</h2><p>通过<code>rz</code> <code>sz</code>命令进行传输</p>
+<p>安装rz sz</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">yum -y install lrzsz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下载文件到主机</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sz 文件路径
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>从主机上传到linux</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">rz #然后从跳出的窗口下载 不推荐
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="14压缩解压">14.压缩解压
+</h2><p>.tar 称为tarball，归档文件，压缩后相比源文件没有太多体积减小</p>
+<p>.gz(.tar.gz)gzip格式压缩文件，采用gzip算法，可以极大的减小体积</p>
+<p><strong>tar命令</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">tar [-c -z -x -v -f -C] 参数1 参数2 ...... 参数n
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-c 创建压缩文件</li>
+<li>-v 显示压缩，解压过程，用于显示进度</li>
+<li>-x，解压文件</li>
+<li>-f 要创建的文件，或者要解压的文件，-f选项必须在所有选项中最后一个</li>
+<li>-z gzip模式 不使用就是tarball模式</li>
+<li>-C 选择解压的目的地，用于解压模式</li>
+</ul>
+<p><strong>zip命令</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">zip [-r] 参数1 参数2 ..... 参数n
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-r 被压缩的带文件夹 要用</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">zip test.zip 文件1 文件2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>解压</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">unzip [-d] zip文件
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>-d 指定要解压去的位置</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">unzip test.zip
+</span></span><span class="line"><span class="cl">unzip test.zip -d /home/root
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="第五章-实战-部署各种软件">第五章 实战 部署各种软件
+</h1><h2 id="1-安装mysql">1. 安装mysql
+</h2><h3 id="安装mysql57">安装mysql5.7
+</h3><p>centos 安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#更新密钥
+</span></span><span class="line"><span class="cl">rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+</span></span><span class="line"><span class="cl">#安装Mysql yum仓库
+</span></span><span class="line"><span class="cl">rpm -Uvh http://repo.mysql.com//mysql57-community-release-el7-7.noarch.rpm
+</span></span><span class="line"><span class="cl">#yum安装Mysql
+</span></span><span class="line"><span class="cl">yum -y install mysql-community-server
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>启动mysql并配置为开机启动</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">systemctl start mysqld
+</span></span><span class="line"><span class="cl">systemctl enable mysqld
+</span></span><span class="line"><span class="cl">#检查状态
+</span></span><span class="line"><span class="cl">systemctl status mysqld
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>配置MySQL</p>
+<p>1.获取初始密码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="c1">#通过grep 获取初始密码</span>
+</span></span><span class="line"><span class="cl"><span class="n">grep</span> <span class="s2">&#34;temporary password&#34;</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">mysqld</span><span class="o">.</span><span class="n">log</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2.登录MySQL数据库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mysql -uroot -p
+</span></span><span class="line"><span class="cl">#-u登录的用户 root
+</span></span><span class="line"><span class="cl">#-p 表示密码登录
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2024 BakaDream
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
