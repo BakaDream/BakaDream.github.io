@@ -1,4 +1,197 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>BakaDream's Blog</title><link>https://blog.132632.xyz/</link><description>Recent content on BakaDream's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 21 Feb 2026 18:10:01 +0800</lastBuildDate><atom:link href="https://blog.132632.xyz/index.xml" rel="self" type="application/rss+xml"/><item><title>记2026年重装黑豹x2后挂载tf卡并设置开机自启</title><link>https://blog.132632.xyz/p/%E8%AE%B02026%E5%B9%B4%E9%87%8D%E8%A3%85%E9%BB%91%E8%B1%B9x2%E5%90%8E%E6%8C%82%E8%BD%BDtf%E5%8D%A1%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/</link><pubDate>Sat, 21 Feb 2026 18:10:01 +0800</pubDate><guid>https://blog.132632.xyz/p/%E8%AE%B02026%E5%B9%B4%E9%87%8D%E8%A3%85%E9%BB%91%E8%B1%B9x2%E5%90%8E%E6%8C%82%E8%BD%BDtf%E5%8D%A1%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/</guid><description>&lt;h2 id="前情提要"&gt;前情提要:
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>BakaDream's Blog</title><link>https://blog.132632.xyz/</link><description>Recent content on BakaDream's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 26 Feb 2026 14:49:04 +0800</lastBuildDate><atom:link href="https://blog.132632.xyz/index.xml" rel="self" type="application/rss+xml"/><item><title>Mac Docker 无缝迁移指南：替代 Docker Desktop，换为OrbStack 实操教程</title><link>https://blog.132632.xyz/p/mac-docker-%E6%97%A0%E7%BC%9D%E8%BF%81%E7%A7%BB%E6%8C%87%E5%8D%97%E6%9B%BF%E4%BB%A3-docker-desktop%E6%8D%A2%E4%B8%BAorbstack-%E5%AE%9E%E6%93%8D%E6%95%99%E7%A8%8B/</link><pubDate>Thu, 26 Feb 2026 14:49:04 +0800</pubDate><guid>https://blog.132632.xyz/p/mac-docker-%E6%97%A0%E7%BC%9D%E8%BF%81%E7%A7%BB%E6%8C%87%E5%8D%97%E6%9B%BF%E4%BB%A3-docker-desktop%E6%8D%A2%E4%B8%BAorbstack-%E5%AE%9E%E6%93%8D%E6%95%99%E7%A8%8B/</guid><description>&lt;p&gt;对于Mac开发者而言，Docker Desktop的卡顿问题想必困扰已久。&lt;/p&gt;
+&lt;p&gt;即便未运行过多容器，其后台也会占用大量内存、导致CPU飙升，不仅电脑风扇频繁运转，偶尔还会出现卡顿闪退的情况，严重影响开发效率——这是许多Mac开发者使用Docker Desktop时的共同体验。&lt;/p&gt;
+&lt;p&gt;OrbStack作为一款高效的替代工具，能够有效解决上述问题。它不仅启动速度快、内存占用较Docker Desktop大幅降低，更核心的是支持无缝迁移，无需重新配置环境、重新拉取镜像，即可将Docker Desktop中的所有配置和数据完整迁移。&lt;/p&gt;
+&lt;p&gt;笔者在实际迁移过程中遇到了网络相关的问题，特此整理了这份手把手实操攻略，帮助大家避开雷区，高效完成迁移，搭建更流畅的Mac容器开发环境。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="一迁移前准备确认当前docker环境"&gt;一、迁移前准备：确认当前Docker环境
+&lt;/h2&gt;&lt;p&gt;安装OrbStack前，建议先确认当前Docker的上下文状态，避免后续迁移出现异常。&lt;/p&gt;
+&lt;p&gt;打开终端，执行以下命令：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker context ls
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;正常情况下，输出应仅包含Docker Desktop相关配置，如下所示：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;NAME DESCRIPTION DOCKER ENDPOINT
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;default Current DOCKER_HOST based configuration unix:///var/run/docker.sock
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;desktop-linux * Docker Desktop unix:///Users/dream/.docker/run/docker.sock
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;建议记录该输出，后续迁移完成后可对比验证迁移效果。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="二安装orbstackhomebrew一键部署"&gt;二、安装OrbStack：Homebrew一键部署
+&lt;/h2&gt;&lt;p&gt;推荐使用Homebrew安装OrbStack，操作简单高效，终端输入以下命令即可完成安装：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;brew install orbstack
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;安装完成后，在「应用程序」中找到OrbStack.app并打开。&lt;/p&gt;
+&lt;p&gt;首次启动OrbStack时，系统会自动引导完成初始化，同时尝试通过GUI图形界面迁移Docker数据，但实际操作中可能出现迁移失败的情况。&lt;/p&gt;
+&lt;p&gt;注意：笔者测试环境中，因网络波动导致GUI自动迁移失败。无需担心，只要成功打开OrbStack应用，其底层引擎已注入系统，后续通过命令行迁移可确保成功率。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="三更换context-确认orbstack上下文生效"&gt;三、更换context 确认OrbStack上下文生效
+&lt;/h2&gt;&lt;p&gt;即便GUI迁移失败，再次执行上下文查看命令，会发现系统中已新增OrbStack相关上下文，说明OrbStack已准备就绪。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker context ls
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;此时输出会包含orbstack上下文，具体如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;NAME DESCRIPTION DOCKER ENDPOINT
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;default Current DOCKER_HOST based configuration unix:///var/run/docker.sock
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;desktop-linux * Docker Desktop unix:///Users/dream/.docker/run/docker.sock
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;orbstack OrbStack unix:///Users/dream/.orbstack/run/docker.sock
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="四迁移失败修复命令行深度迁移"&gt;四迁移失败修复：命令行深度迁移
+&lt;/h2&gt;&lt;p&gt;当GUI迁移失效时，可通过OrbStack自带的CLI工具手动触发迁移，该方法稳定性更高，具体步骤如下。&lt;/p&gt;
+&lt;h3 id="41-常见问题迁移时网络超时"&gt;4.1 常见问题：迁移时网络超时
+&lt;/h3&gt;&lt;p&gt;首先执行以下迁移命令进行尝试：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;orb docker migrate
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;国内网络环境下，大概率会出现如下超时错误：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;run src agent: pull image: [Docker] Get &amp;#34;https://ghcr.io/v2/&amp;#34;: context deadline exceeded
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;原因分析：迁移过程中需要从GitHub容器仓库拉取代理镜像（Agent），国内网络直接访问该仓库易出现超时，这是迁移过程中最常见的问题。&lt;/p&gt;
+&lt;h3 id="42-解决方案开启tun模式"&gt;4.2 解决方案：开启TUN模式
+&lt;/h3&gt;&lt;p&gt;解决该问题的关键是确保终端流量可通过代理访问外部网络，具体操作如下：打开Clash等代理工具，开启TUN模式，确保终端流量被全局代理。&lt;/p&gt;
+&lt;p&gt;无需重启OrbStack，直接在终端重新执行迁移命令：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;orb docker migrate
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;等待一段时间后，会出现迁移成功的输出，全程自动完成，无需手动干预：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;INFO[0000] Starting Docker Desktop
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;INFO[0005] Migration started
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;INFO[0005] Migrating image nginx:alpine
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;INFO[0041] Migrating container /nginx-container
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;INFO[0058] Done
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;当输出最后一行显示Done时，说明Docker Desktop中的所有镜像、容器、网络配置已完整迁移至OrbStack，迁移过程无数据丢失。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="五验证迁移结果确认环境正常"&gt;五、验证迁移结果：确认环境正常
+&lt;/h2&gt;&lt;p&gt;迁移完成后，需通过以下步骤验证环境是否正常，确保迁移效果。&lt;/p&gt;
+&lt;p&gt;首先执行上下文查看命令，确认默认上下文已自动切换至orbstack（带*号即为默认）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker context ls
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;随后检查容器状态，确认原Docker Desktop中的容器已在OrbStack中正常启动：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker container ps
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;若能正常显示原有容器列表，说明迁移已完全成功。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="六彻底卸载docker-desktop清理残留"&gt;六、彻底卸载Docker Desktop：清理残留
+&lt;/h2&gt;&lt;p&gt;确认OrbStack环境正常运行后，可彻底卸载Docker Desktop，释放系统资源，具体操作分为3步，确保清理干净无残留：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;卸载Docker Desktop应用&lt;/strong&gt;：
+&lt;code&gt;brew uninstall docker-desktop&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;删除Docker Desktop上下文&lt;/strong&gt;：
+&lt;code&gt;docker context rm desktop-linux&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;清理残留配置（释放磁盘空间）&lt;/strong&gt;：
+&lt;code&gt;rm -rf /Users/dream/.docker&lt;/code&gt;
+注：执行该命令后无任何输出，即表示清理成功。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="七进阶避坑解决docker-compose失效问题"&gt;七、进阶避坑：解决docker compose失效问题
+&lt;/h2&gt;&lt;p&gt;部分用户卸载Docker Desktop后，会出现docker compose命令无法使用的情况，可通过以下3步快速解决：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;完全退出OrbStack（右键状态栏图标，选择“Quit”）；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重新打开OrbStack，等待状态栏图标变为绿色（表示启动完成）；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重新打开终端，执行&lt;code&gt;docker compose version&lt;/code&gt;，若能正常显示版本号，即表示问题已解决。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;该方法可解决99%的docker compose失效问题，核心原理是通过重启OrbStack使相关配置生效。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="八总结迁移核心要点"&gt;八、总结：迁移核心要点
+&lt;/h2&gt;&lt;p&gt;从Docker Desktop迁移至OrbStack，能够显著提升Mac容器开发环境的流畅度，降低系统资源占用，迁移过程虽可能遇到网络问题，但只要掌握正确方法，即可实现无缝无损迁移。&lt;/p&gt;
+&lt;p&gt;总结3个核心要点，帮助大家避开迁移过程中的所有坑：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;先装后迁&lt;/strong&gt;：迁移前需确保Docker Desktop处于运行状态，否则会导致迁移失败；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络优先&lt;/strong&gt;：若遇到迁移超时，开启TUN模式让终端走代理，即可快速解决；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;重启生效&lt;/strong&gt;：无论是docker compose失效，还是路径报错，重启OrbStack基本可解决问题。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;按照本文教程操作，即可顺利完成Docker环境迁移，摆脱Docker Desktop的卡顿困扰，获得更高效的开发体验。&lt;/p&gt;
+&lt;p&gt;若操作过程中遇到其他问题，可在评论区留言，笔者将逐一回复解答。&lt;/p&gt;</description></item><item><title>记2026年重装黑豹x2后挂载tf卡并设置开机自启</title><link>https://blog.132632.xyz/p/%E8%AE%B02026%E5%B9%B4%E9%87%8D%E8%A3%85%E9%BB%91%E8%B1%B9x2%E5%90%8E%E6%8C%82%E8%BD%BDtf%E5%8D%A1%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/</link><pubDate>Sat, 21 Feb 2026 18:10:01 +0800</pubDate><guid>https://blog.132632.xyz/p/%E8%AE%B02026%E5%B9%B4%E9%87%8D%E8%A3%85%E9%BB%91%E8%B1%B9x2%E5%90%8E%E6%8C%82%E8%BD%BDtf%E5%8D%A1%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/</guid><description>&lt;h2 id="前情提要"&gt;前情提要:
 &lt;/h2&gt;&lt;p&gt;2026年年初，我给黑豹X2重装了Armbian系统（版本v26.02.0 for RK.Panther-X2，内核6.12.69-ophub），系统顺利刷入eMMC并正常启动。考虑到日常使用中需要存储较多文件，自带的eMMC空间有限，我准备将一张60G的TF卡挂载到系统中，同时配置开机自启，避免每次重启后手动挂载，提升使用便利性。&lt;/p&gt;
 &lt;p&gt;另外，虽然eMMC速度略优于TF卡，但这张60G TF卡专门用于存储数据，无需承担系统运行压力，既能扩展存储空间，也能减少eMMC的写入损耗，一举两得。&lt;/p&gt;
 &lt;h2 id="准备过程"&gt;准备过程
